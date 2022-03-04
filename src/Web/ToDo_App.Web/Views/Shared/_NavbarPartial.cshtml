@@ -1,0 +1,61 @@
+﻿<nav class="navbar navbar-fixed-top navbar-light">
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="tab">
+
+    </a>
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="navbar-nav">
+                    <a asp-controller="Home" asp-action="Index">
+                        <i class="fa fa-user"> Profile</i>
+                    </a>
+                </li>
+                <li class="navbar-nav">
+                    <a asp-controller="Account" asp-action="Edit" asp-route-userName="@User.Identity.Name">
+                        <i class="fa fa-gear"> Settings</i>
+                    </a>
+                </li>
+                <li class="navbar-nav">
+                    <a asp-controller="Account" asp-action="ChangePassword" asp-route-userName="@User.Identity.Name">
+                        <i class="fa fa-lock"> Change Password</i>
+                    </a>
+                </li>
+
+                <li class="navbar-nav">
+                    <a asp-controller="Reminder" asp-action="TodaysReminders">
+                        <i class="fa fa-bell"></i>
+                        @if (ViewData["todaySum"] != null)
+                        {
+                            <span class="label label-danger">@ViewData["todaySum"]</span>
+                        }
+                        else
+                        {
+                            <span class="label label-warning"></span>
+                        }
+                    </a>
+                </li>
+
+                <li class="navbar-nav">
+                    <a asp-controller="Account" asp-action="Logout">
+                        <i class="fa fa-sign-out"> Logout</i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="navbar-nav">
+                    <a asp-controller="Account" asp-action="Login">
+                        <i class="fa fa-sign-in"> Login</i>
+                    </a>
+                </li>
+                <li class="navbar-nav">
+                    <a asp-controller="Account" asp-action="Register">
+                        <i class="fa fa-user-plus"> Register</i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

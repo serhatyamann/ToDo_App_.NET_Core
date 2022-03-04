@@ -1,0 +1,98 @@
+﻿@model List<GetReminderVM>
+@{
+    ViewData["Title"] = "List";
+}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link href="~/css/ionicons.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/css/_all-skins.min.css" rel="stylesheet" />
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="text-center">Completed Reminders</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="table-responsive-md">
+            <table class="table table-hover table-bordered table-responsive-md">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">#ID</th>
+                        <th style="width:120px;">Due Date</th>
+                        <th style="width:120px;">Complete Date</th>
+                        <th style="width:90px;">Category</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th style="width:80px;text-align:center;">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td style="background-color:floralwhite;" class="text-bold">@item.Id</td>
+                        <td style="background-color:yellow;color:black;">@item.DueDate</td>
+                        <td style="background-color:yellow;color:black;">@item.CompletedDate</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td class="text-center">
+                            <span class="label label-success">Checked</span>
+                        </td>
+                        <td style="text-align:center;">
+                            <a asp-controller="Reminder" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger text-center">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            @if (TempData["SuccessDeleteReminder"] != null)
+            {
+                <div class="alert alert-success notification">
+                    @TempData["SuccessDeleteReminder"]
+                </div>
+            }
+        </div>
+    </div>
+
+    <style>
+
+        h1,
+        h3 {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        td {
+            border: 1px solid black;
+            word-wrap: break-word;
+            padding-inline: auto;
+            vertical-align: middle;
+            /*max-width: fit-content;*/
+        }
+    </style>
+
+</body>
+</html>

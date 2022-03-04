@@ -1,0 +1,57 @@
+﻿@model UpdateProfileModel
+
+<div class="col-sm-3">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Update Profile</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input asp-for="UserName" class="form-control" placeholder="User Name" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>E Mail</label>
+                    <input asp-for="Email" class="form-control" placeholder="Email Address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="file" asp-for="Image">
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary pull-right" />
+                </div>
+
+            </form>
+            <div style="margin-top:30px;">
+                <a style="color:red" asp-controller="Account" asp-action="DeleteUser"><i class="fa fa-remove"></i> Delete Your Account</a>
+            </div>
+        </div>
+        @if (TempData["SuccessUpdate"] != null)
+        {
+            <div class="card-footer alert alert-success notification">
+                @TempData["SuccessUpdate"]
+            </div>
+        }
+        else if (TempData["Error"] != null)
+        {
+            <div class="card-footer alert alert-warning notification">
+                @TempData["Error"]
+            </div>
+        }
+    </div>
+</div>

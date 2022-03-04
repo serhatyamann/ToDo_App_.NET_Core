@@ -1,0 +1,49 @@
+﻿@model List<GetCategoryVM>
+@{
+    ViewData["Title"] = "List";
+}
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="text-center">Category List</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <span><a asp-controller="Category" asp-action="Create" style="margin-bottom:7px;" class=" btn btn-primary fa fa-plus"> Add New</a></span>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 10px">Id</th>
+                    <th>Name</th>
+                    <th style="width: 40px">Update</th>
+                    <th style="width: 40px">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+
+                        <td>
+                            <span class="label label-info">@item.Name</span>
+                        </td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Update</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (TempData["SuccessCreateCategory"] != null)
+        {
+            <div class="alert alert-success notification" style="margin-top:7px;">
+                @TempData["SuccessCreateCategory"]
+            </div>
+        }
+    </div>
+</div>
